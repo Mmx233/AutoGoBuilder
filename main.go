@@ -44,7 +44,7 @@ func main(){
 				shell.DoBuild(name, dir, path, key, mip)
 			}
 		}
-		if err:=shell.Zip(dir+"/dist/*",dir+"/dist/"+name+"_all.zip");err!=nil{
+		if err:=shell.Zip(dir+"/dist/","*","../dist/"+name+"_all.zip");err!=nil{
 			CallBack.Error("压缩过程出错")
 		}
 	}

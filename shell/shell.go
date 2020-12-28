@@ -14,8 +14,8 @@ func Exec(command string)(string,error){
 	return strings.Trim(string(out),"\n"),err
 }
 
-func Zip(file string,target string)error{
-	_,err:=Exec("zip -q "+target+" "+file)
+func Zip(path string,file string,target string)error{
+	_,err:=Exec("cd "+path+" && zip -q "+target+" "+file)
 	return err
 }
 
@@ -27,11 +27,11 @@ func DoBuild(Name string,Dir string,Path string,GOOS string,GOARCH string){
 	}
 	out:=file.FindDist(Path)
 	if out==""{
-		CallBack.Error("编译 "+GOOS+" "+GOARCH+" 失败")
+		CallBack.Error("编译 "+GOOS+" "+GOARCH+" 版失败")
 		file.Remove(Dir,true)
 		os.Exit(3)
 	}
-	if err:=Zip(Path+"/"+out,Dir+"/dist/"+Name+"_"+GOOS+"_"+GOARCH+".zip");err != nil {
+	if err:=Zip(Path,out,"../dist/"+Name+"_"+GOOS+"_"+GOARCH+".zip");err != nil {
 		CallBack.Error("未知错误")
 		file.Remove(Dir,true)
 		os.Exit(3)
