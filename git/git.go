@@ -1,18 +1,14 @@
 package git
 
 import (
-	"fmt"
-	"math/rand"
 	"mmx/CallBack"
 	"mmx/file"
 	"mmx/shell"
 	"os"
-	"time"
 )
 
-func Clone(url string,name string) string {
-	rand.Seed(time.Now().UnixNano())
-	temp:=fmt.Sprintf("%v%v",time.Now().Unix(),rand.Int())+name
+func Clone(url string,name string,unix string) string {
+	temp:=unix+name
 	os.Mkdir(temp,700)
 	os.Mkdir(temp+"/dist",700)
 	os.Mkdir(temp+"/src",700)
